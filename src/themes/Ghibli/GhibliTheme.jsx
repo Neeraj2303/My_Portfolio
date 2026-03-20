@@ -3,6 +3,39 @@ import { portfolioData } from '../../data/portfolioData';
 import { motion } from 'framer-motion';
 import './GhibliTheme.css';
 
+const TotoroSVG = () => (
+    <svg width="150" height="180" viewBox="0 0 120 150" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ position: 'absolute', bottom: '0px', right: '5%', zIndex: 5, pointerEvents: 'none' }}>
+        {/* Ears */}
+        <path d="M 30,50 Q 20,10 40,20 Q 50,30 40,50 Z" fill="#758A80" />
+        <path d="M 90,50 Q 100,10 80,20 Q 70,30 80,50 Z" fill="#758A80" />
+        {/* Body */}
+        <ellipse cx="60" cy="100" rx="45" ry="55" fill="#758A80" />
+        {/* Belly */}
+        <ellipse cx="60" cy="110" rx="35" ry="40" fill="#E8F1DC" />
+        {/* Belly Marks */}
+        <path d="M 40,90 Q 45,80 50,90" stroke="#758A80" strokeWidth="3" fill="none" strokeLinecap="round" />
+        <path d="M 60,85 Q 65,75 70,85" stroke="#758A80" strokeWidth="3" fill="none" strokeLinecap="round" />
+        <path d="M 80,90 Q 85,80 90,90" stroke="#758A80" strokeWidth="3" fill="none" strokeLinecap="round" />
+        <path d="M 35,110 Q 40,100 45,110" stroke="#758A80" strokeWidth="3" fill="none" strokeLinecap="round" />
+        <path d="M 55,105 Q 60,95 65,105" stroke="#758A80" strokeWidth="3" fill="none" strokeLinecap="round" />
+        <path d="M 75,105 Q 80,95 85,105" stroke="#758A80" strokeWidth="3" fill="none" strokeLinecap="round" />
+        {/* Eyes */}
+        <circle cx="45" cy="65" r="6" fill="#FFF" />
+        <circle cx="45" cy="65" r="2.5" fill="#000" />
+        <circle cx="75" cy="65" r="6" fill="#FFF" />
+        <circle cx="75" cy="65" r="2.5" fill="#000" />
+        {/* Nose */}
+        <ellipse cx="60" cy="72" rx="4" ry="2.5" fill="#000" />
+        {/* Whiskers */}
+        <line x1="12" y1="65" x2="30" y2="70" stroke="#000" strokeWidth="1.5" strokeLinecap="round" />
+        <line x1="8" y1="75" x2="28" y2="76" stroke="#000" strokeWidth="1.5" strokeLinecap="round" />
+        <line x1="108" y1="65" x2="90" y2="70" stroke="#000" strokeWidth="1.5" strokeLinecap="round" />
+        <line x1="112" y1="75" x2="92" y2="76" stroke="#000" strokeWidth="1.5" strokeLinecap="round" />
+        {/* Leaf on head */}
+        <path d="M 60,35 Q 45,20 70,15 Q 85,25 60,35 Z" fill="#6DAA60" />
+    </svg>
+);
+
 export const GhibliTheme = () => {
     const { personal, skills, projects, contact } = portfolioData;
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -20,7 +53,6 @@ export const GhibliTheme = () => {
 
     return (
         <div className="ghibli-theme">
-            {/* Hand-drawn style animated clouds with Parallax Mouse effect */}
             <motion.div
                 className="ghibli-cloud ghibli-cloud-1"
                 animate={{ x: mousePos.x * -2, y: mousePos.y * -2 }}
@@ -87,13 +119,14 @@ export const GhibliTheme = () => {
                     </div>
                 </section>
 
-                <footer className="ghibli-footer" style={{ position: 'relative', zIndex: 10 }}>
+                <footer className="ghibli-footer" style={{ position: 'relative', zIndex: 10, minHeight: '200px', display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '4rem' }}>
                     <p style={{ fontSize: '1.4rem' }}>May the wind guide your path. © {new Date().getFullYear()}</p>
                     <div className="ghibli-socials">
                         <a href={`mailto:${contact.email}`}>Owl Mail (Email)</a>
                         <a href={contact.github} target="_blank" rel="noreferrer">Scrolls (GitHub)</a>
                         <a href={contact.linkedin} target="_blank" rel="noreferrer">Guild (LinkedIn)</a>
                     </div>
+                    <TotoroSVG />
                 </footer>
 
             </div>

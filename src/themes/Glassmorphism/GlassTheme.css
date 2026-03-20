@@ -3,7 +3,7 @@
 .glass-theme {
     font-family: 'Outfit', sans-serif;
     min-height: 100vh;
-    padding: 4rem 2rem;
+    padding: 4rem 2rem 2rem;
     color: #fff;
     position: relative;
     overflow-x: hidden;
@@ -69,6 +69,7 @@
     display: flex;
     flex-direction: column;
     gap: 3rem;
+    padding-bottom: 2rem;
 }
 
 .glass-card {
@@ -146,7 +147,6 @@
 }
 
 .glass-project-card:hover {
-    transform: translateY(-10px) scale(1.02);
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.2);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
