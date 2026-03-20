@@ -1,20 +1,27 @@
 import React from 'react';
 import { portfolioData } from '../../data/portfolioData';
+import Tilt from 'react-parallax-tilt';
+import { motion } from 'framer-motion';
 import './MinimalistTheme.css';
 
 export const MinimalistTheme = () => {
     const { personal, skills, projects, contact } = portfolioData;
 
+    const fadeUp = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+    };
+
     return (
         <div className="minimalist-theme">
             <div className="minimalist-container">
 
-                <header className="min-hero">
+                <motion.header className="min-hero" initial="hidden" animate="visible" variants={fadeUp}>
                     <h1>{personal.name}</h1>
                     <p>{personal.tagline}</p>
-                </header>
+                </motion.header>
 
-                <section className="min-section">
+                <motion.section className="min-section" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}>
                     <h2>About</h2>
                     <p style={{ maxWidth: '750px', fontSize: '1.2rem', color: '#444' }}>
                         {personal.about}
@@ -27,33 +34,35 @@ export const MinimalistTheme = () => {
                             ))}
                         </div>
                     </div>
-                </section>
+                </motion.section>
 
-                <section className="min-section">
+                <motion.section className="min-section" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}>
                     <h2>Selected Work</h2>
                     <div className="min-projects">
-                        {projects.map(project => (
-                            <a href={project.link} key={project.id} className="min-project-card" style={{ textDecoration: 'none', color: 'inherit' }}>
-                                <h3>{project.name}</h3>
-                                <p>{project.description}</p>
-                                <div className="min-tech-stack">
-                                    {project.techStack.map((tech, i) => (
-                                        <span key={i} className="min-tech-tag">{tech}</span>
-                                    ))}
-                                </div>
-                            </a>
+                        {projects.map((project, idx) => (
+                            <Tilt key={project.id} tiltMaxAngleX={5} tiltMaxAngleY={5} scale={1.02} transitionSpeed={2000} style={{ display: 'flex', flexDirection: 'column' }}>
+                                <a href={project.link} className="min-project-card" style={{ textDecoration: 'none', color: 'inherit', height: '100%', flexGrow: 1 }}>
+                                    <h3>{project.name}</h3>
+                                    <p>{project.description}</p>
+                                    <div className="min-tech-stack">
+                                        {project.techStack.map((tech, i) => (
+                                            <span key={i} className="min-tech-tag">{tech}</span>
+                                        ))}
+                                    </div>
+                                </a>
+                            </Tilt>
                         ))}
                     </div>
-                </section>
+                </motion.section>
 
-                <footer className="min-footer">
+                <motion.footer className="min-footer" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
                     <div>© {new Date().getFullYear()} {personal.name}</div>
                     <div className="min-socials">
                         <a href={`mailto:${contact.email}`}>Email</a>
                         <a href={contact.github} target="_blank" rel="noreferrer">GitHub</a>
                         <a href={contact.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
                     </div>
-                </footer>
+                </motion.footer>
 
             </div>
         </div>

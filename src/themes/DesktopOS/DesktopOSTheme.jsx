@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { portfolioData } from '../../data/portfolioData';
 import { Folder, FileText } from 'lucide-react';
+import { motion } from 'framer-motion';
 import './DesktopOSTheme.css';
 
 export const DesktopOSTheme = () => {
@@ -12,30 +13,39 @@ export const DesktopOSTheme = () => {
 
             {/* Desktop Icons */}
             <div className="os-desktop-icons">
-                <div className="os-icon" onDoubleClick={() => setWindowOpen(true)} onClick={() => setWindowOpen(true)}>
+                <motion.div drag dragMomentum={false} className="os-icon" onDoubleClick={() => setWindowOpen(true)} onClick={() => setWindowOpen(true)}>
                     <div style={{ background: 'transparent', padding: '10px', display: 'inline-block' }}>
                         <Folder size={48} color="#fff" fill="#000080" />
                     </div>
                     <div>My Portfolio</div>
-                </div>
+                </motion.div>
 
-                <div className="os-icon">
+                <motion.div drag dragMomentum={false} className="os-icon">
                     <div style={{ background: 'transparent', padding: '10px', display: 'inline-block' }}>
                         <FileText size={48} color="#fff" fill="#fff" />
                     </div>
                     <div>Resume.txt</div>
-                </div>
+                </motion.div>
             </div>
 
-            {/* Main Window */}
+            {/* Main Window - Fully Draggable! */}
             {windowOpen && (
-                <div className="os-window">
-                    <div className="os-titlebar">
+                <motion.div
+                    className="os-window"
+                    drag
+                    dragMomentum={false}
+                    dragHandle=".os-titlebar"
+                    initial={{ scale: 0.8, opacity: 0, x: '-50%' }}
+                    animate={{ scale: 1, opacity: 1, x: '-50%' }}
+                    exit={{ scale: 0.8, opacity: 0 }}
+                    style={{ position: 'absolute', left: '50%' }}
+                >
+                    <div className="os-titlebar" style={{ cursor: 'grab' }} >
                         <span>My_Portfolio.exe</span>
-                        <button className="os-close-btn" onClick={() => setWindowOpen(false)}>X</button>
+                        <button className="os-close-btn" onPointerDownCapture={e => e.stopPropagation()} onClick={() => setWindowOpen(false)}>X</button>
                     </div>
 
-                    <div className="os-content">
+                    <div className="os-content" onPointerDownCapture={e => e.stopPropagation()}>
                         <div className="os-hero">
                             <h1>{personal.name}</h1>
                             <p>{personal.role} - {personal.tagline}</p>
@@ -79,7 +89,7 @@ export const DesktopOSTheme = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </motion.div>
             )}
 
             {/* Taskbar */}

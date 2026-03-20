@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { portfolioData } from '../../data/portfolioData';
+import { MatrixRain } from './MatrixRain';
 import './TerminalTheme.css';
 
 const AsciiArt = () => (
@@ -34,6 +35,7 @@ export const TerminalTheme = () => {
 
     return (
         <div className="terminal-theme">
+            <MatrixRain />
             <div className="term-container">
                 {bootSeq >= 0 && <div className="term-line">Initializing system... [OK]</div>}
                 {bootSeq >= 1 && <div className="term-line">Loading profile data... [OK]</div>}

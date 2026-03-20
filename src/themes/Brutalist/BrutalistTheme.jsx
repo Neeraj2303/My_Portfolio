@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { portfolioData } from '../../data/portfolioData';
+import { motion } from 'framer-motion';
 import './BrutalistTheme.css';
 
 export const BrutalistTheme = () => {
     const { personal, skills, projects, contact } = portfolioData;
+    const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
+
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+            setMousePos({ x: e.clientX, y: e.clientY });
+        };
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
 
     const getMarqueeText = () => {
         return Array(10).fill(`${personal.role} /// `).join('');
@@ -11,11 +21,32 @@ export const BrutalistTheme = () => {
 
     return (
         <div className="brutalist-theme">
+            {/* Custom Global Cursor */}
+            <div
+                className="bru-cursor"
+                style={{ left: mousePos.x, top: mousePos.y }}
+            >
+                <div className="bru-cursor-h"></div>
+                <div className="bru-cursor-v"></div>
+            </div>
+
             <div className="brutalist-container">
 
                 <header className="bru-hero">
-                    <h1>{personal.name.toUpperCase()}</h1>
-                    <p>{personal.tagline.toUpperCase()}</p>
+                    <motion.h1
+                        initial={{ x: -100, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ type: 'spring', bounce: 0.5 }}
+                    >
+                        {personal.name.toUpperCase()}
+                    </motion.h1>
+                    <motion.p
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ delay: 0.2, type: 'spring' }}
+                    >
+                        {personal.tagline.toUpperCase()}
+                    </motion.p>
 
                     <div className="bru-marquee">
                         <div className="bru-marquee-content">
@@ -30,7 +61,13 @@ export const BrutalistTheme = () => {
 
                     <div className="bru-skills">
                         {skills.map((skill, index) => (
-                            <div key={index} className="bru-skill-tag">{skill}</div>
+                            <motion.div
+                                key={index}
+                                className="bru-skill-tag"
+                                whileHover={{ scale: 1.1, rotate: index % 2 === 0 ? 5 : -5, backgroundColor: '#ffea00' }}
+                            >
+                                {skill}
+                            </motion.div>
                         ))}
                     </div>
                 </section>
@@ -38,8 +75,14 @@ export const BrutalistTheme = () => {
                 <section>
                     <h2 className="bru-section-title">The Output</h2>
                     <div className="bru-projects">
-                        {projects.map((project) => (
-                            <a href={project.link} key={project.id} className="bru-card">
+                        {projects.map((project, idx) => (
+                            <motion.a
+                                href={project.link}
+                                key={project.id}
+                                className="bru-card"
+                                whileHover={{ scale: 1.05, rotate: idx % 2 === 0 ? 2 : -2, x: 10, y: -10 }}
+                                transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                            >
                                 <h3>{project.name.toUpperCase()}</h3>
                                 <p>{project.description}</p>
                                 <div className="bru-card-tech">
@@ -55,7 +98,7 @@ export const BrutalistTheme = () => {
                                         }}>{tech}</span>
                                     ))}
                                 </div>
-                            </a>
+                            </motion.a>
                         ))}
                     </div>
                 </section>
