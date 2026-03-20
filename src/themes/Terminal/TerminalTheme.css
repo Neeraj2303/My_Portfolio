@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap');
+
+.terminal-theme {
+    font-family: 'Fira Code', 'Courier New', Courier, monospace;
+    color: #0f0;
+    background-color: #0a0a0a;
+    min-height: 100vh;
+    padding: 2rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    box-sizing: border-box;
+}
+
+/* scanline effect */
+.terminal-theme::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 2;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+}
+
+.term-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+    padding-bottom: 5rem;
+}
+
+.term-line {
+    margin-bottom: 0.5rem;
+    word-break: break-word;
+}
+
+.term-prompt {
+    color: #fff;
+    font-weight: 600;
+    margin-right: 0.5rem;
+}
+
+.term-command {
+    color: #0ff;
+}
+
+.term-output {
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+    border-left: 2px solid #333;
+}
+
+.term-ascii {
+    white-space: pre;
+    color: #f0f;
+    margin-bottom: 2rem;
+    font-size: 0.75rem;
+    line-height: 1.2;
+    overflow-x: auto;
+}
+
+.term-project {
+    margin-bottom: 1.5rem;
+}
+
+.term-project a {
+    color: #0ff;
+    text-decoration: none;
+}
+
+.term-project a:hover {
+    background: #0f0;
+    color: #000;
+}
+
+.term-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1.2em;
+    background: #0f0;
+    vertical-align: bottom;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .terminal-theme {
+        padding: 1rem;
+        font-size: 0.85rem;
+    }
+
+    .term-ascii {
+        font-size: 0.45rem;
+    }
+}
