@@ -5,8 +5,34 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   min-height: 100vh;
-  font-family: sans-serif; 
+  font-family: sans-serif;
+}
+
+/* Aggressively map body backgrounds to prevent empty white scroll-gaps at edges */
+body.theme-glass {
+  background-color: #0f172a;
+}
+
+body.theme-minimalist {
+  background-color: #fdfdfd;
+}
+
+body.theme-terminal {
+  background-color: #0a0a0a;
+}
+
+body.theme-brutalist {
+  background-color: #fff4e0;
+}
+
+body.theme-os {
+  background-color: #008080;
+}
+
+body.theme-ghibli {
+  background-color: #e6f2e6;
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { portfolioData } from '../../data/portfolioData';
+import Tilt from 'react-parallax-tilt';
 import { motion } from 'framer-motion';
 import './GlassTheme.css';
 
@@ -48,21 +49,21 @@ export const GlassTheme = () => {
                     <h2 className="glass-section-title">Selected Projects</h2>
                     <div className="glass-grid">
                         {projects.map((project) => (
-                            <motion.a
-                                href={project.link}
-                                key={project.id}
-                                className="glass-project-card"
-                                whileHover={{ scale: 1.05, y: -10 }}
-                                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                            >
-                                <h3>{project.name}</h3>
-                                <p>{project.description}</p>
-                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginTop: 'auto' }}>
-                                    {project.techStack.map((tech, i) => (
-                                        <span key={i} className="glass-skill-tag" style={{ fontSize: '0.85rem', padding: '0.4rem 1rem' }}>{tech}</span>
-                                    ))}
-                                </div>
-                            </motion.a>
+                            <Tilt key={project.id} tiltMaxAngleX={8} tiltMaxAngleY={8} scale={1.03} transitionSpeed={2000} style={{ display: 'flex', flexDirection: 'column' }}>
+                                <a
+                                    href={project.link}
+                                    className="glass-project-card"
+                                    style={{ flexGrow: 1, height: '100%' }}
+                                >
+                                    <h3>{project.name}</h3>
+                                    <p>{project.description}</p>
+                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginTop: 'auto' }}>
+                                        {project.techStack.map((tech, i) => (
+                                            <span key={i} className="glass-skill-tag" style={{ fontSize: '0.85rem', padding: '0.4rem 1rem' }}>{tech}</span>
+                                        ))}
+                                    </div>
+                                </a>
+                            </Tilt>
                         ))}
                     </div>
                 </motion.section>
