@@ -22,14 +22,17 @@ export const BrutalistTheme = () => {
 
     return (
         <div className="brutalist-theme">
-            {/* Custom Global Cursor */}
-            <div
-                className="bru-cursor"
-                style={{ left: mousePos.x, top: mousePos.y }}
-            >
-                <div className="bru-cursor-h"></div>
-                <div className="bru-cursor-v"></div>
-            </div>
+            {/* Custom Global Cursor - Portaled to avoid transform containing blocks */}
+            {createPortal(
+                <div
+                    className="bru-cursor"
+                    style={{ left: mousePos.x, top: mousePos.y }}
+                >
+                    <div className="bru-cursor-h"></div>
+                    <div className="bru-cursor-v"></div>
+                </div>,
+                document.body
+            )}
 
             <div className="brutalist-container">
 
